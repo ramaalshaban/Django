@@ -14,8 +14,8 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             print("heeeeereeeeeeeeeeeee", username)
-            messages.success(request, f'Account created for {username}!')
-            return redirect('blog-home')
+            messages.success(request, f'Sayin {username} Your account has been created! you are now able to log in.')
+            return redirect('login')
         # create a form that has req.post data
         # when it gets a post req it it will
         # instantiate a user creation form

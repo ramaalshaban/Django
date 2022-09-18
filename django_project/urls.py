@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from re import template
 from django.contrib import admin
 from django.urls import path, include
 from users import views as user_views
+from django.contrib.auth import views as auth_views
 
 # which routs should go to our blog urls
 urlpatterns = [
@@ -23,6 +25,12 @@ urlpatterns = [
     path('register/', user_views.register, name = 'register'),
     # this is another way to build a url pattern
     path('', include('blog.urls')),
+    path('login/', auth_views.LoginView.as_view(template_name= 'users/login.html'), name = 'login'),
+    # as_view(request)
+    path('logout/', auth_views.LogoutView.as_view(template_name= 'users/logout.html'), name = 'logout'),
+    # By calling the as_view() function on my view class login/logoutView will give me a view
+    # which i will call with request parameter to initiate the request-response cycle.
+
 
     # send an empty string to blog urls
 # here when it passes this to the urls of the app
