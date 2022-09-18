@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1> {{ user.username }}</h1>
+{% endblock content %}
+
+
+<!-- we need to crete url pattern that uses 
+the reg view so that we can navigate
+   to this page in the browseer-->

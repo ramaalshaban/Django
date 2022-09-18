@@ -126,5 +126,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+
+# these mean that there is some default routes that we changed    
 LOGIN_REDIRECT_URL = 'blog-home'
+LOGIN_URL = 'login'
 # blog-home is the name of thr path that we give to the blog home page 
