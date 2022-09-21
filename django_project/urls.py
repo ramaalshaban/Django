@@ -18,6 +18,10 @@ from django.urls import path, include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 
+from django.conf import settings 
+from django.conf.urls.static import static
+
+
 # which routs should go to our blog urls
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,3 +44,7 @@ urlpatterns = [
 # here we set up the mappig from certain urls to where we sent the user so 
 
 # this will tell our whole website which urls should send us to our blog a[[??]]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# i coudnt understand this part

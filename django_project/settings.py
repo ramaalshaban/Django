@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -120,8 +122,26 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+
+# os muhabbeti is relating to the operating system 
+# base direcktory ?
+
+# Media Root is the root where our fotos are uploaded in the file system 
+#  it will create a profile_pics folder inside of ,edia root 
+# AND this media will be located at the base directory of our image .
+
+
+#MR is p ath to diroktory where django store uploaded files
+# this photos is saved in the file system not in the database
+
+# Media URL is how we will access thi image in the browser
+# /media/profile_pics/the name of the image 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
