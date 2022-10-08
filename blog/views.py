@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 # Create your views here.
 from .models import Post #this is the moedel i created in the shell 
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView
 
 # the function here will handle the traffic from home 
 # page of our blog   
@@ -62,6 +62,32 @@ class PostListView(ListView):
     # to solve that we will change the name to posts here 
     context_object_name = 'posts'
     ordering= ['-date_posted']
+
+class PostDetailView(DetailView):
+    model = Post
+
+    # now i need to build the url pattern
+
+    # when i dont specify a template name
+    # the generic class base view will be looking
+    # for a template whith naming # <app>/<model>_<viewtype>.html 
+
+
+
+
+class PostCreateView(CreateView):
+    # here i will use form to create new post
+    model = Post
+    #and we need to add the fields in that form 
+    fields= ['title', 'content']
+    # these are a built in views
+
+
+    # now i will override the form method
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+        
 
 
 

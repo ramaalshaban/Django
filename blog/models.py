@@ -16,6 +16,17 @@ class Post(models.Model):
     def __sre__(self):
         return self.title
         # search about this.
+        #  get_absolute_url() a function that returns URL of a model object
+        # by this method django know how to find specific location to specific post
+
+        # the diff between redirect and reverse 
+
+
+
+
+
+
+
 # the detqails that is printed out to be more discriptive
 
 # .modelname_set
