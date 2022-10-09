@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User  
+from django.urls import reverse
 # here i am using the built in sytem for users 
 
 
@@ -22,7 +23,12 @@ class Post(models.Model):
         # the diff between redirect and reverse 
 
 
+        # absoluteurlmethod that tell django how to find the url to any instance
+        # this method return the path to ant spec instance
 
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk':self.pk})
+        # return reverse('blog-home')
 
 
 

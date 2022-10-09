@@ -2,7 +2,8 @@
 from django.http import HttpResponse
 # Create your views here.
 from .models import Post #this is the moedel i created in the shell 
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # the function here will handle the traffic from home 
 # page of our blog   
@@ -46,7 +47,7 @@ def home(request):
     return render(request, 'blog/home.html', context)
 
 
-class PostListView(ListView):
+class PostListView( ListView):
     model = Post
     # here we set new template so that we can use our existing template of the home page
     template_name = 'blog/home.html'
@@ -75,21 +76,48 @@ class PostDetailView(DetailView):
 
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     # here i will use form to create new post
     model = Post
     #and we need to add the fields in that form 
     fields= ['title', 'content']
     # these are a built in views
 
-
+ 
     # now i will override the form method
     def form_valid(self,form):
         form.instance.author = self.request.user
         return super().form_valid(form)
         
 
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+    # here i will use form to create new post
+    model = Post
+    #and we need to add the fields in that form 
+    fields= ['title', 'content']
+    # these are a built in views
 
+ 
+    # now i will override the form method
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+        
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+    model = Post
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False    
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'Some Titile '})
