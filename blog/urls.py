@@ -16,7 +16,7 @@ urlpatterns = [
     path('post/new/', PostCreateView.as_view(),name='post-create'),
     # the form name i will create for this one wil lbe named like post_form as a temolate
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
-    path('post/<int:pk>/delete', PostDeleteView.as_view(), name='post-delete'),
+    path('post/<int:pk>/delete', PostDeleteView.as_view(success_url= '/'), name='post-delete'),
 
 
 ]
