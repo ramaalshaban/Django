@@ -63,6 +63,9 @@ class PostListView( ListView):
     # to solve that we will change the name to posts here 
     context_object_name = 'posts'
     ordering= ['-date_posted']
+    paginate_by= 2
+    #url/?page=int
+
 
 class PostDetailView(DetailView):
     model = Post
