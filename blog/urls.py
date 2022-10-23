@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import PostListView, PostDetailView,PostCreateView,PostUpdateView,PostDeleteView
+from .views import PostListView, PostDetailView,PostCreateView,PostUpdateView,PostDeleteView,UserPostListView
 urlpatterns = [
     # path('', views.home, name='blog-home'),
     path('', PostListView.as_view(), name='blog-home'),
@@ -17,7 +17,7 @@ urlpatterns = [
     # the form name i will create for this one wil lbe named like post_form as a temolate
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete', PostDeleteView.as_view(success_url= '/'), name='post-delete'),
-
+    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
 
 ]
 
