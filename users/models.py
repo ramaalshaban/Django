@@ -22,7 +22,7 @@ class Profile(models.Model):
 # if we want to show this model on the admin part i need to register this model on the admin filke
 
 # here we are trying to "override the save method ??"
-    def save(self):
+    def save(self, **kwargs):
         # here im calling the class that is already exist in the parent class //somethong about run the method?..
         super().save()
         # here we open the image for the instance that we are saving
